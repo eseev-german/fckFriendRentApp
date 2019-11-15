@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          login-client:
+            provider: vk-auth
+            client-id: client-id
+            client-secret: client-secrete
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            scope: friends #temporary
+            redirect-uri: '{baseUrl}/login'
+            v: 5.103
+        provider:
+          vk-auth:
+            authorization-uri: https://oauth.vk.com/authorize
+            token-uri: https://oauth.vk.com/access_token
+            user-info-uri: https://api.vk.com/method/users.get
+            userNameAttribute: response
+logging:
+  level:
+    root: debug
+
