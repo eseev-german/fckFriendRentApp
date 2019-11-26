@@ -14,6 +14,9 @@ spring:
             scope: friends #temporary
             redirect-uri: '{baseUrl}/login'
             v: 5.103
+            api:
+              baseurl: https://api.vk.com/method
+              followers: /users.getFollowers
         provider:
           vk-auth:
             authorization-uri: https://oauth.vk.com/authorize
