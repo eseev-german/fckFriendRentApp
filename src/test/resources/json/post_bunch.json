@@ -1,0 +1,89 @@
+{
+  "response": [
+    {
+      "count": 2049,
+      "items": [
+        {
+          "id": 11,
+          "from_id": 1,
+          "owner_id": 2,
+          "date": 1572633558,
+          "post_type": "post",
+          "text": "First text",
+          "attachments": [
+            {
+              "type": "photo",
+              "photo": {
+                "id": 2,
+                "album_id": -7,
+                "owner_id": 7172064,
+                "sizes": [
+                  {
+                    "type": "m",
+                    "url": "url1",
+                    "width": 97,
+                    "height": 130
+                  },
+                  {
+                    "type": "o",
+                    "url": "url2",
+                    "width": 130,
+                    "height": 173
+                  }
+                ],
+                "text": "some text",
+                "date": 1572633551,
+                "post_id": 123,
+                "access_key": "access_key"
+              }
+            }
+          ],
+          "post_source": {
+            "type": "api",
+            "platform": "android"
+          },
+          "comments": {
+            "count": 6,
+            "can_post": 1,
+            "groups_can_post": true
+          },
+          "likes": {
+            "count": 44,
+            "user_likes": 0,
+            "can_like": 1,
+            "can_publish": 1
+          },
+          "reposts": {
+            "count": 0,
+            "user_reposted": 0
+          },
+          "views": {
+            "count": 492
+          },
+          "is_favorite": false
+        },
+        {
+          "id": 12,
+          "from_id": 4,
+          "owner_id": 5,
+          "date": 1571337916,
+          "post_type": "post",
+          "text": "second text"
+        }
+      ]
+    },
+    false
+  ],
+  "execute_errors": [
+    {
+      "method": "wall.get",
+      "error_code": 18,
+      "error_msg": "User was deleted or banned"
+    },
+    {
+      "method": "execute",
+      "error_code": 18,
+      "error_msg": "User was deleted or banned"
+    }
+  ]
+}

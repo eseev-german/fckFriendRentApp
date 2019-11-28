@@ -1,8 +1,12 @@
 package fck.friend.rent.config;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import fck.friend.rent.converter.VkOAuth2UserRequestEntityConverter;
+import fck.friend.rent.dto.post.PostBunchDto;
+import fck.friend.rent.dto.user.UserDto;
+import fck.friend.rent.serializer.PostBunchDtoDeserializer;
+import fck.friend.rent.serializer.UserDtoDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +50,6 @@ public class VkOAuth2Configuration {
         return new RestTemplateBuilder()
                 .interceptors(addVkParams(clientService))
                 .uriTemplateHandler(new DefaultUriBuilderFactory(baseUrl))
-                .messageConverters(mappingJackson2HttpMessageConverter())
                 .build();
     }
 
@@ -60,8 +63,10 @@ public class VkOAuth2Configuration {
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
-
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(PostBunchDto.class, new PostBunchDtoDeserializer());
+        module.addDeserializer(UserDto.class, new UserDtoDeserializer());
+        mapper.registerModule(module);
         return mapper;
     }
 

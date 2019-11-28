@@ -16,7 +16,8 @@ spring:
             v: 5.103
             api:
               baseurl: https://api.vk.com/method
-              followers: /users.getFollowers
+              friends: /friends.get
+              posts: /execute.getPosts
         provider:
           vk-auth:
             authorization-uri: https://oauth.vk.com/authorize

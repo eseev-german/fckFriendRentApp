@@ -1,6 +1,5 @@
 package fck.friend.rent.integration;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import fck.friend.rent.dto.user.UserDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,23 +8,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class UserProvider {
+public class PostsProvider {
     private final RestTemplate vkRestTemplate;
 
-    private final String friendsUrl;
+    private final String postsUrl;
 
-    public UserProvider(@Qualifier("vkRestTemplate")
+    public PostsProvider(@Qualifier("vkRestTemplate")
                                 RestTemplate vkRestTemplate,
-                        @Value("${spring.security.oauth2.client.registration.login-client.api.friends}")
-                                String friendsUrl) {
+                        @Value("${spring.security.oauth2.client.registration.login-client.api.posts}")
+                                String postsUrl) {
         this.vkRestTemplate = vkRestTemplate;
-        this.friendsUrl = friendsUrl;
+        this.postsUrl = postsUrl;
     }
 
     public UserDto get() {
-        ResponseEntity<JsonNode> exchange = vkRestTemplate.getForEntity(friendsUrl, JsonNode.class);
-
-        System.out.println(exchange);
-        return null;
+        ResponseEntity<UserDto> exchange = vkRestTemplate.getForEntity(postsUrl, UserDto.class);
+        return exchange.getBody();
     }
 }
