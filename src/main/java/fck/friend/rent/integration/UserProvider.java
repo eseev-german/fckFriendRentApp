@@ -1,6 +1,5 @@
 package fck.friend.rent.integration;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import fck.friend.rent.dto.user.UserDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,9 +22,8 @@ public class UserProvider {
     }
 
     public UserDto get() {
-        ResponseEntity<JsonNode> exchange = vkRestTemplate.getForEntity(friendsUrl, JsonNode.class);
+        ResponseEntity<UserDto> exchange = vkRestTemplate.getForEntity(friendsUrl, UserDto.class);
 
-        System.out.println(exchange);
-        return null;
+        return exchange.getBody();
     }
 }

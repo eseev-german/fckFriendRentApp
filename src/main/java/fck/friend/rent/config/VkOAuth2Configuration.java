@@ -50,6 +50,7 @@ public class VkOAuth2Configuration {
         return new RestTemplateBuilder()
                 .interceptors(addVkParams(clientService))
                 .uriTemplateHandler(new DefaultUriBuilderFactory(baseUrl))
+                .messageConverters(mappingJackson2HttpMessageConverter())
                 .build();
     }
 
