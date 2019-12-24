@@ -5,14 +5,14 @@ spring:
     oauth2:
       client:
         registration:
-          login-client:
+          vk-login-client:
             provider: vk-auth
             client-id: client-id
             client-secret: client-secrete
             client-authentication-method: basic
             authorization-grant-type: authorization_code
             scope: friends #temporary
-            redirect-uri: '{baseUrl}/login'
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             v: 5.103
             api:
               baseurl: https://api.vk.com/method

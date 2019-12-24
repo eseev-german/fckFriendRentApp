@@ -40,8 +40,8 @@ public class PostBunchDtoDeserializer extends StdDeserializer<PostBunchDto> {
         PostDto post = new PostDto();
         post.setId(postNode.get("id")
                            .asText());
-        post.setOwnerId(postNode.get("owner_id")
-                                .asText());
+//        post.setOwnerId(postNode.get("owner_id")
+//                                .asText());
         post.setFromId(postNode.get("from_id")
                                .asText());
         post.setDate(postNode.get("date")

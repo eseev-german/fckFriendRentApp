@@ -3,27 +3,28 @@ package fck.friend.rent.integration;
 import fck.friend.rent.dto.user.UserDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Component
 public class UserProvider {
-    private final RestTemplate vkRestTemplate;
+    private final WebClient vkWebClient;
 
     private final String friendsUrl;
 
-    public UserProvider(@Qualifier("vkRestTemplate")
-                                RestTemplate vkRestTemplate,
-                        @Value("${spring.security.oauth2.client.registration.login-client.api.friends}")
+    public UserProvider(@Qualifier("vkWebClient")
+                                WebClient vkWebClient,
+                        @Value("${spring.security.oauth2.client.registration.vk-login-client.api.friends}")
                                 String friendsUrl) {
-        this.vkRestTemplate = vkRestTemplate;
+        this.vkWebClient = vkWebClient;
         this.friendsUrl = friendsUrl;
     }
 
-    public UserDto get() {
-        ResponseEntity<UserDto> exchange = vkRestTemplate.getForEntity(friendsUrl, UserDto.class);
-
-        return exchange.getBody();
+    public Mono<UserDto> get() {
+        return vkWebClient.get()
+                          .uri(friendsUrl)
+                          .retrieve()
+                          .bodyToMono(UserDto.class);
     }
 }
